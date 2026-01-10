@@ -1,0 +1,8 @@
+{
+  "tone": "professional",
+  "length": "medium",
+  "focus": "solution",
+  "instruction": "Write concise, persuasive, and actionable copy tailored to the prospect's industry.",
+  "apiEndpoint": "https://api.example.com/ghostwriter",
+  "apiKey": ""
+}
