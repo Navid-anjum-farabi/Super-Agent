@@ -119,7 +119,10 @@ function simulateAgentActivity() {
 
 // Simulate lead updates
 function simulateLeadUpdate() {
-  const leadId = `lead_${Math.floor(Math.random() * 1000)}`
+  // Align lead IDs with the dashboard's mock leads ("1", "2", "3") so real-time
+  // updates visibly apply to existing cards in the Intelligence Dashboard.
+  const leadIds = ['1', '2', '3']
+  const leadId = leadIds[Math.floor(Math.random() * leadIds.length)]
   const statuses = ['new', 'researching', 'drafting', 'ready']
   const agents = ['scout', 'ghostwriter', 'secretary']
   

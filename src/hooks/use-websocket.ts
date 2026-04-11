@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react'
 import { io, Socket } from 'socket.io-client'
+import { toast } from '@/hooks/use-toast'
 
 interface AgentStatus {
   [agent: string]: {
@@ -39,7 +40,8 @@ export function useWebSocket() {
 
   useEffect(() => {
     // Initialize socket connection
-    const socketInstance = io('ws://localhost:3003', {
+    // NOTE: WebSocket service currently runs on port 3001 (see mini-services/websocket-service/index.ts)
+    const socketInstance = io('ws://localhost:3001', {
       transports: ['websocket'],
       upgrade: false
     })
@@ -84,8 +86,11 @@ export function useWebSocket() {
       
       // Also show toast notification for high priority
       if (notification.priority === 'high') {
-        // You can integrate with your toast system here
-        console.log('High priority notification:', notification.message)
+        toast({
+          title: notification.type || 'High priority notification',
+          description: notification.message,
+          variant: 'destructive',
+        })
       }
     })
 

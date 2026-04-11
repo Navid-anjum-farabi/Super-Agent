@@ -8,6 +8,7 @@ import { AgentWorkspace } from '@/components/agent-workspace/agent-workspace'
 import { GhostwriterSettings } from '@/components/agent-management/ghostwriter-settings'
 import { VoiceRecorder } from '@/components/voice/voice-recorder'
 import { AgentManagement } from '@/components/agent-management/agent-management'
+import { ScoutAgentDashboard } from '@/components/agent-management/scout-agent-dashboard'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -28,7 +29,7 @@ import {
   Database
 } from 'lucide-react'
 
-type ViewType = 'home' | 'dashboard' | 'agents' | 'scout' | 'ghostwriter' | 'ghostwriter-settings' | 'secretary' | 'knowledge' | 'leads' | 'settings'
+type ViewType = 'home' | 'dashboard' | 'agents' | 'agent-workspace' | 'scout' | 'ghostwriter' | 'ghostwriter-settings' | 'secretary' | 'knowledge' | 'leads' | 'settings'
 
 export default function Home() {
   const [activeView, setActiveView] = useState<ViewType>('dashboard')
@@ -39,6 +40,10 @@ export default function Home() {
         return <IntelligenceDashboard />
       case 'settings':
         return <CommandCenter />
+      case 'agent-workspace':
+        return <AgentWorkspace onOpenSettings={() => setActiveView('ghostwriter-settings')} />
+      case 'scout':
+        return <ScoutAgentDashboard />
       case 'ghostwriter':
         return <AgentWorkspace onOpenSettings={() => setActiveView('ghostwriter-settings')} />
       case 'ghostwriter-settings':

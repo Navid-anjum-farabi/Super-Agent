@@ -58,8 +58,8 @@ export function ScoutAgentDashboard() {
     }
 
     const result = await testAgent({
-      company: testLead,
-      action: 'research',
+      companyName: testLead,
+      notes: 'Test run from Scout Agent Dashboard',
     })
 
     setTestResult(result)

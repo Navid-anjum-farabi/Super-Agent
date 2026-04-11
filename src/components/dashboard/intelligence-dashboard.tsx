@@ -21,7 +21,8 @@ import {
   Target,
   Activity,
   Wifi,
-  WifiOff
+  WifiOff,
+  Bell
 } from 'lucide-react'
 
 interface Lead {
@@ -201,6 +202,51 @@ export function IntelligenceDashboard() {
             </Card>
           </div>
         </div>
+
+        {/* Notifications Panel */}
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Bell className="h-5 w-5" />
+              Live Notifications
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {notifications.length === 0 ? (
+              <p className="text-sm text-muted-foreground">No notifications yet.</p>
+            ) : (
+              <ScrollArea className="h-40">
+                <div className="space-y-3">
+                  {notifications.map((notification, index) => (
+                    <div
+                      key={index}
+                      className="flex items-start justify-between border rounded-md p-3 bg-background/60"
+                    >
+                      <div>
+                        <p className="text-sm font-medium">{notification.message}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {notification.type} • {notification.timestamp}
+                        </p>
+                      </div>
+                      <Badge
+                        variant="outline"
+                        className={
+                          notification.priority === 'high'
+                            ? 'border-red-500 text-red-600'
+                            : notification.priority === 'medium'
+                              ? 'border-orange-500 text-orange-600'
+                              : 'border-gray-400 text-gray-600'
+                        }
+                      >
+                        {notification.priority}
+                      </Badge>
+                    </div>
+                  ))}
+                </div>
+              </ScrollArea>
+            )}
+          </CardContent>
+        </Card>
 
         <Card>
           <CardHeader>
